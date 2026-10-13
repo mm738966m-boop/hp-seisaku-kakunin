@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>お申し込み｜fulfull ホームページ制作</title>
+<meta name="description" content="会社名と今のホームページのアドレスを送るだけ。3日ほどで新しいページの案をお届けします。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@500;700;800;900&display=swap">
+<link rel="stylesheet" href="../style.css?v=17">
+</head>
+<body>
+<div style="background:#1C3236;color:#fff;text-align:center;font-size:14px;font-weight:700;padding:6px 12px;line-height:1.6">確認用のページです（公開前・社内確認用）</div>
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="../"><b>fulfull</b><span>ホームページ制作</span></a>
+    <nav><a href="../#price">料金</a><a href="../#faq">よくある質問</a><a class="cta" href="../apply/">申し込む</a></nav>
+  </div>
+</header>
+<main class="doc"><div class="narrow">
+<div class="eyebrow">申し込み（3分ほど）</div>
+<h1>できあがりの案を無料で見る</h1>
+<div class="say wide applysay"><img src="../img/mascot_invite.webp" alt="" width="440" height="440"><p><span class="l">入力は5つだけです。</span><span class="l">案が届くまで、</span><span class="l">お金はかかりません。</span></p></div>
+
+<form class="form" id="f" data-kind="apply" novalidate>
+  <div class="field"><label for="company">会社名<span class="req">必須</span></label><input id="company" name="company" type="text" autocomplete="organization" required></div>
+  <div class="field"><label for="name">ご担当の方のお名前<span class="req">必須</span></label><input id="name" name="name" type="text" autocomplete="name" required><small>社長ご本人でも、ホームページを担当されている方でも大丈夫です。</small></div>
+  <div class="field"><label for="url">今のホームページ<span class="opt">わかる範囲で</span></label><input id="url" name="url" type="text" placeholder="www.〇〇.co.jp"><small>www. から始まる文字です。わからなければ空欄で大丈夫です。会社名からこちらで探します。</small></div>
+  <div class="field"><label for="email">メールアドレス<span class="req">必須</span></label><input id="email" name="email" type="email" autocomplete="email" inputmode="email" required><small>できあがりの案は、このメールアドレスにお送りします。</small></div>
+  <div class="field"><label for="tel">電話番号<span class="req">必須</span></label><input id="tel" name="tel" type="tel" autocomplete="tel" inputmode="tel" placeholder="090-1234-5678" required pattern="[0-9０-９\-ー－ ()（）+]{10,}"><small>携帯電話がおすすめです。メールが届かなかったときにだけ、ご連絡します。</small></div>
+  <div class="field"><label for="memo">伝えておきたいこと<span class="opt">書かなくても大丈夫です</span></label><textarea id="memo" name="memo" rows="4" placeholder="例：採用のページを充実させたい／載せたい実績がある"></textarea></div>
+  <div class="hp" aria-hidden="true"><label>このまま空欄にしてください<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>
+  <p class="note">毎月の料金は、できあがりの案を見てから選べます。いまは決めなくて大丈夫です。</p>
+  <p class="note">お送りいただいた内容は、案を作ることとそのご連絡にだけ使います。<a href="../terms/">利用規約</a>・<a href="../privacy/">プライバシーポリシー</a></p>
+  <div id="msg" class="msg" tabindex="-1" hidden></div>
+  <div class="center"><button class="btn" type="submit" data-label="無料で申し込む">無料で申し込む</button></div>
+</form>
+
+<div id="done" class="scene" tabindex="-1" hidden>
+  <h2 style="margin-top:0;border:0;padding:0">受け付けました</h2>
+  <p>受付番号：<b id="no">—</b></p>
+  <p><span class="l">確認のメールをお送りしました。</span><span class="l">3日ほどで、できあがりの案をお届けします。</span><span class="l">メールが見当たらない場合は、「迷惑メール」という場所もご確認ください。</span></p>
+  <p><a href="../">トップへ戻る</a></p>
+</div>
+</div></main>
+<footer>
+  <div class="wrap">
+    <span>© 2026 fulfull株式会社</span>
+    <nav><a href="../terms/">利用規約</a><a href="../law/">特定商取引法に基づく表記</a><a href="../privacy/">プライバシーポリシー</a><a href="../stop/">案内を止める</a><a href="https://fulfull.jp/">fulfull.jp</a></nav>
+  </div>
+</footer>
+<script>
+// 受け口（GASのウェブアプリURL）。公開前にここへ入れる。空のあいだは送信しない。
+const API = "";
+const form = document.getElementById("f");
+const msg = document.getElementById("msg");
+const done = document.getElementById("done");
+function show(kind, text){ msg.className = "msg " + kind; msg.textContent = text; msg.hidden = false; msg.focus(); }
+form.addEventListener("submit", async (e) => {
+  e.preventDefault();
+  if (!form.reportValidity()) return;
+  const data = Object.fromEntries(new FormData(form).entries());
+  data.kind = form.dataset.kind; data.page = location.pathname; data.at = new Date().toISOString();
+  if (data.website) return;               // 見えない欄に入力があれば機械とみなす
+  if (!API) { show("err", "受付の準備中です。数日のうちに開始します。お急ぎの場合は fulfull.jp のお問い合わせフォームからご連絡ください。"); return; }
+  const btn = form.querySelector("button[type=submit]"); btn.disabled = true; btn.textContent = "送っています…";
+  try {
+    const r = await fetch(API, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(data) });
+    const j = await r.json();
+    if (!j.ok) throw new Error(j.error || "error");
+    form.hidden = true; done.hidden = false;
+    const no = document.getElementById("no"); if (no && j.no) no.textContent = j.no;
+    done.focus();
+  } catch (err) {
+    btn.disabled = false; btn.textContent = btn.dataset.label;
+    show("err", "送信できませんでした。電波の良い場所でもう一度お試しください。");
+  }
+});
+</script>
+</body>
+</html>
