@@ -363,3 +363,10 @@ html, body { overflow-x: clip; }
 .form .btn { min-width: min(100%, 320px); }
 .applysay p { font-size: 17px; padding: 12px 16px; }
 .optgo { margin: 12px 0 0; }
+
+/* 申し込みのボタンはLINE緑（2026-10-20） */
+.btn:not(.ghost), .close .btn { background: #06C755; color: #fff; box-shadow: 0 6px 0 #04913E; }
+.btn:not(.ghost):hover, .btn:not(.ghost):focus-visible, .close .btn:hover, .close .btn:focus-visible { background: #05B04B; }
+.btn:not(.ghost):active, .close .btn:active { box-shadow: 0 2px 0 #04913E; }
+.top nav a.cta { background: #06C755; }
+.top nav a.cta:hover, .top nav a.cta:focus-visible { background: #05B04B; }
