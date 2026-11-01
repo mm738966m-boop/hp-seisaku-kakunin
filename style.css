@@ -499,3 +499,4 @@ html, body { overflow-x: clip; }
   .hero.has-now .now { display: grid; grid-template-columns: 52% 1fr; gap: 12px; align-items: center; padding: 8px; }
   .hero.has-now .now p { margin: 0; font-size: 15px; }
 }
+@media (max-width: 899px) { .hero .btnrow { order: 3; } .hero .pricechip { order: 5; margin-top: 14px; } }
